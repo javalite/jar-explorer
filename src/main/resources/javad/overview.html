@@ -1,0 +1,189 @@
+<HTML><HEAD>
+<TITLE>Javad: class file disassembler</TITLE>
+</HEAD>
+<BODY>
+
+The <i>javad</i> program reads a Java class file and
+writes out a Java like source representation of the class that
+generated the file.  This kind of program is commonly called a
+Java class file disassembler.
+
+<p> 
+Regardless of the number of classes in a source file, Java
+compilers that follow Sun's Java scheme will compile one class per
+file.  This program reads the compiled class and dumps it in a
+readable form, akin to Java source.
+</p>
+
+<h4>
+Usage
+</h4>
+
+<pre>
+java javad.main <i>classfile-list</i>
+</pre>
+<p>
+For example: <tt>java javad.main one.class two.class three.class</tt>
+
+<h4>
+Notes
+</h4>
+
+<ul>
+<li>
+u1 : unsigned byte value
+</li>
+<li>
+u2 : unsigned two byte value
+</li>
+<li>
+u4 : unsigned four byte value
+</li>
+</ul>
+
+<h4>
+Why was this program written?
+</h4>
+
+<p>
+I wanted to understand the Java class file format.  This was
+critical for my work on a Java compiler, since a Java compiler
+must be able to read class symbol information from the .class
+file.
+
+<h4>
+Why would you be interested in this program?
+</h4>
+
+<p> 
+If you are working on the Java class file format for a Java
+Virtual Machine or other system support for Java execution, an
+understanding of the Java class file format is important.  The Java
+code for javad is commented extensively and in some places explains
+features that are poorly documented in the Java Virtual Machine
+Specification (by Lindholm and Yellin, second edition, Addison Wesley,
+1999).
+</p>
+
+<h4>
+How do you regenerate the documentation using <i>javadoc</i>?
+</h4>
+
+<p>
+I find <i>javadoc</i> rather obscure and hard to use.  But I really
+like the idea of documentation that is automaticly generated from
+the Java source.  The documentation for the javad program was created
+using the source line command
+</p>
+
+<pre>
+javadoc -author -overview overview.html -private -use -d doc attr classfile jconst util javad.java
+</pre>
+
+<p>
+Here <i>doc</i> is the directory containing the documentaton.  Note that
+the packages are listed before the javad.java file.
+</p>
+
+<h4>
+Prior Art
+</h4>
+
+<p>
+A number of Java class file disassemblers have been written.  One of
+these is shipped in binary form with the Sun Java release
+(<i>javap</i>).  There are several class file disassemblers available
+in source form.  These include:
+</p>
+ 
+<ul>
+<li>
+<p>
+Djava
+</p>
+<p>
+Djava is a Java class file disassembler written in C.  This program is
+available from a number of sites, including <a
+href="http://www.sco.com/skunkware/98/java/">http://www.sco.com/skunkware/98/java/</a>.
+The program was written by Shawn Silverman.  Apparently a Java version
+of Djava also exists.
+</p>
+</li>
+
+<li>
+<p>
+Jasper
+</p>
+<p>
+Jasper is a Java class file disassembler written in Java.  I did not
+find this published on a web page.  It was published in a discussion
+group on object oriented programming.  The author is Chris Rathman.  I
+have no idea if this URL will hold up over time, but I found it 
+<a href="http://server2.ezboard.com/fobjectorienteddevelopmentjava.showMessage?topicID=3.topic">here</a>.
+</p>
+
+</ul>
+
+<h4>
+Disassemblers and decompilers
+</h4>
+
+<p> 
+As any Java programmer knows, Java does not use header files to
+define external classes (e.g., a class that is not in the current
+file).  Information about the structure of a class can be obtained
+from a .class file.  As the <i>javad</i> and the other class file
+disassemblers show, the much of the original source for the class
+definition can be recovered from the class file.
+</p>
+
+<p>
+Compared to machine code (e.g., x86, powerPC, SPARC), Java byte codes are
+very high level.  A clever piece of software can recover something
+close to the original source code for the methods. These programs are
+referred to as decompilers.  For those who want to keep their source
+code secret there are Java code obfuscators.
+
+<p>
+A list of Java disassemblers and decompilers is published on <a href="http://www.meurrens.org/ip-Links/Java/codeEngineering/decomp.html">Marc
+Meurrens home page</a>.
+
+<p>
+This page mentions that Hanpeter van Vliet wrote a Java decompiler,
+named Mocha.  Apparently the program does a good job of decompiling
+Java class files.  When it appeared the first response, presumably of
+some United States citizens, was to threaten to sue.  Sanity seems to
+have asserted itself and no one sued.  But it spurred the development
+of "obfuscators", including van Vliet's own "Crema".  A copy of van
+Vliet's "manifesto" can be found <a href="http://www.meurrens.org/ip-Links/Java/codeEngineering/tercentennial.html">here</a>.
+
+<p>
+According to this web page, van Vliet died of cancer on December 31,
+1996 at age 34, not long after finishing Mocha.  The current Mocha
+release can also be found on <a href="http://www.brouhaha.com/~eric/computers/mocha.html">Eric Smith's web page</a>
+
+<p>
+It is interesting to note that at one point Borland/Imprise sent
+e-mail to Eric Smith claiming ownership of Mocha.  The despicable
+way that some companies treat free software is the motivation for
+the Bear Products International source license agreement
+used for Javad.
+
+<p>
+The European KOPI project has created a Java source to byte code
+compiler.  KOPI also includes byte code assemblers and a class file
+disassembler.  The KOPI project can be found <a
+href="http://www.dms.at/kopi/index.html">here</a>
+
+<p> Marco Schmidt has published a list of Java compilers and Java
+VMs.  This list can be found <a
+href="http://www.geocities.com/~marcoschmidt/java.html">here</a>
+
+<p>
+For copyright and usage permissions for the <i>javad</i> program, see the
+<a href="../copyright.html">copyright</a>
+
+@author Ian Kaplan
+ 
+</BODY>
+</HTML>

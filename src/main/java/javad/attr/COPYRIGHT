@@ -1,0 +1,47 @@
+  
+  javad: Java class file dump (disassembler)
+
+  Copyright and Usage
+  -------------------
+
+  This copyright notice is inspired by Red Hat, VA Linux and other
+  companies that repackage the unpaid work of others for their own
+  obscene profit.  At Bear Products International we believe in
+  sharing software with other software engineers.  We do not believe
+  in being exploited by people who want to repackage our work for
+  profit without paying us for it.
+
+  The author of this software is Ian Kaplan
+  Bear Products International
+  www.bearcave.com
+  iank@bearcave.com
+
+  Copyright (c) Ian Kaplan, 1999, 2000
+
+  THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+  IMPLIED WARRANTY. IN PARTICULAR, THE AUTHOR MAKES NO REPRESENTATION
+  OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY OF THIS
+  SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+  Javad is not public-domain software or shareware, and it is not
+  protected by a `copyleft' agreement, like the code from the Free
+  Software Foundation.
+
+  Javad is available free for your personal research and instructional
+  use under the `fair use' provisions of the copyright law. You may,
+  however, redistribute Javad in whole or in part provided you
+  acknowledge its source (www.bearcave.com) and author, Ian Kaplan,
+  Bear Products International. YOU MUST ALSO INCLUDE THIS COPYRIGHT
+  NOTICE IN YOUR DISTRIBUTION.  You may, for example, include the
+  software in a CDROM of free software, provided you charge only for
+  the media AND mirror the distribution files at your Web site.
+
+  You may NOT sell Javad or any product derived from it.  For example,
+  the Javad code or code derived from it may not be used in a Java
+  compiler or Java tools for which you charge money.
+
+  Any use where others stand to make a profit from what is the work of
+  Bear Products International, requires a license agreement.  Per-copy
+  and unlimited use licenses are available; for more information,
+  contact Ian Kaplan, iank@bearcave.com, Bear Products International
+  (www.bearcave.com).
