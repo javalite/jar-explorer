@@ -17,11 +17,9 @@ import java.util.zip.ZipEntry;
 
 
 /**
- *
  * @author Igor Polevoy
  */
-public class JarExplorer extends JFrame
-{
+public class JarExplorer extends JFrame {
 
     private static final String APP_NAME = "JarExplorer 0.6 Beta"; // this version is as good as any :)
 
@@ -82,8 +80,7 @@ public class JarExplorer extends JFrame
 
     private EntryIndex index = new EntryIndex();
 
-    public JarExplorer()
-    {
+    public JarExplorer() {
         super(APP_NAME);
         GUIUtil.setMainFrame(this);
 
@@ -106,15 +103,15 @@ public class JarExplorer extends JFrame
 
     /**
      * builds a tool bar
+     *
      * @return toolbar instance with components added and wired with event listeners
      */
-    private JToolBar buildToolBar()
-    {
+    private JToolBar buildToolBar() {
 
         JToolBar tb = new JToolBar();
         tb.addSeparator();
         tb.add(stopB = new JButton("Stop"));
-        stopB.setCursor(Cursor.getDefaultCursor() );
+        stopB.setCursor(Cursor.getDefaultCursor());
         stopB.setToolTipText("stops directory scan");
         tb.add(cleanB = new JButton("Clean"));
         cleanB.setToolTipText("cleans windows");
@@ -135,11 +132,9 @@ public class JarExplorer extends JFrame
      *
      * @param g Graphic context passed from JVM
      */
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         super.paint(g);
-        if (!init)
-        {
+        if (!init) {
             mainSp.setDividerLocation(0.5);
             //subSplitPane.setDividerLocation(0.75);
             init = true;
@@ -147,8 +142,7 @@ public class JarExplorer extends JFrame
 
     }
 
-    private void init()
-    {
+    private void init() {
         stop = false;
         clean();
     }
@@ -156,25 +150,18 @@ public class JarExplorer extends JFrame
     /**
      * Wires action listeners to action components
      */
-    private void addActionListeners()
-    {
-        searchTF.addFocusListener(new FocusAdapter()
-        {
-            public void focusGained(FocusEvent arg0)
-            {
-                if (firstTime)
-                {
+    private void addActionListeners() {
+        searchTF.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent arg0) {
+                if (firstTime) {
                     firstTime = false;
                     searchTF.setText("");
                 }
             }
         });
-        searchTF.addKeyListener(new KeyAdapter()
-        {
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                {
+        searchTF.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     search();
                 }
             }
@@ -182,47 +169,35 @@ public class JarExplorer extends JFrame
         });
 
 
-        addWindowListener(new WindowAdapter()
-        {
-            public void windowClosing(WindowEvent e)
-            {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
 
-        searchB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        searchB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 search();
             }
         });
-        stopB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        stopB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 stop = true;
 
             }
         });
-        cleanB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        cleanB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 clean();
             }
         });
 
-        jarFilePanel.addSelectionListener(new ListSelectionListener()
-        {
-            public void valueChanged(ListSelectionEvent e)
-            {
+        jarFilePanel.addSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
 
-                if (!e.getValueIsAdjusting())
-                {
+                if (!e.getValueIsAdjusting()) {
                     String selectedJar = jarFilePanel.getSelectedJar();
-                    if (selectedJar != null)
-                    {
+                    if (selectedJar != null) {
                         showJarContent(selectedJar);
                     }
 
@@ -233,56 +208,38 @@ public class JarExplorer extends JFrame
 
     /**
      * Shows contents of a jar file in the search results panel.
+     *
      * @param jarFile - jar file name, should be a fully qualified path to a file
      */
-    private void showJarContent(String jarFile)
-    {
+    private void showJarContent(String jarFile) {
         ArrayList matchingClasses = this.index.getClassesInJar(jarFile);
         resultsPanel.setResults("Contents of " + jarFile, matchingClasses);
     }
 
-    private void scanPath()
-    {
+    private void scanPath() {
         JFileChooser fc;
-        if (prevFile != null)
-        {
+        if (prevFile != null) {
             fc = new JFileChooser(prevFile);
-        }
-        else
-        {
+        } else {
             fc = new JFileChooser();
         }
         fc.setDialogType(JFileChooser.OPEN_DIALOG);
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        //commented out because this causes the jar view in dialog be default. Need to revisit.
-//        fc.addChoosableFileFilter(new FileFilter()
-//        {
-//            public boolean accept(File f)
-//            {
-//                try
-//                {
-//                    return f.getCanonicalPath().endsWith(".jar");
-//                }
-//                catch(IOException e){ return false; }
-//            }
-//
-//            public String getDescription()
-//            {
-//                return "jar";
-//            }
-//        });
         fc.setApproveButtonText("Select");
         fc.setDialogTitle("Locate Root Directory or Jar File:");
+        fc.setFileHidingEnabled(false);
         fc.showOpenDialog(JarExplorer.this);
+
+
+
         final File f = fc.getSelectedFile();
 
         if (f == null) //dialog cancelled
         {
             return;
         }
-        
-        if(!f.getPath().endsWith(".jar") && f.isFile())
-        {
+
+        if (!f.getPath().endsWith(".jar") && f.isFile()) {
             GUIUtil.messageBox(this, "Message:", "Can process jar files only");
             return;
         }
@@ -294,14 +251,11 @@ public class JarExplorer extends JFrame
     /**
      * builds a menu
      */
-    private void buildMenu()
-    {
+    private void buildMenu() {
         JMenu fileM = new JMenu("File");
         JMenuItem loadMI = new JMenuItem("Locate Root Directory or Jar File");
-        loadMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        loadMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 scanPath();
             }
         });
@@ -309,10 +263,8 @@ public class JarExplorer extends JFrame
         fileM.add(loadMI);
 
         JMenuItem exitMI = new JMenuItem("Exit");
-        exitMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        exitMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
@@ -321,10 +273,8 @@ public class JarExplorer extends JFrame
         fileM.addSeparator();
 
         lastFileMI = new JMenuItem(Configuration.getProperty(Options.LAST_FILE));
-        lastFileMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        lastFileMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 final String file = Configuration.getProperty(Options.LAST_FILE);
                 scanPath(new File(file));
             }
@@ -335,30 +285,24 @@ public class JarExplorer extends JFrame
 
         JMenu toolsM = new JMenu("Tools");
         JMenuItem optionsMI = new JMenuItem("Options");
-        optionsMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        optionsMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 optionsD.setVisible(true);
             }
         });
         toolsM.add(optionsMI);
 
         JMenuItem licenseMI = new JMenuItem("License");
-        licenseMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        licenseMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 LicenseDialog dialog = new LicenseDialog();
                 dialog.setVisible(true);
             }
         });
 
         JMenuItem aboutMI = new JMenuItem("About");
-        aboutMI.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        aboutMI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 GUIUtil.messageBox(JarExplorer.this, "About: ", "<html>" + APP_NAME + "<br>by Igor Polevoy<br/><font size=\"-1\"><i>w/ addition from Greg Tatham</i></font></html>");
             }
         });
@@ -366,7 +310,7 @@ public class JarExplorer extends JFrame
 
         helpM.add(licenseMI);
         helpM.add(aboutMI);
-        
+
         JMenuBar mb = new JMenuBar();
         mb.add(fileM);
         mb.add(toolsM);
@@ -374,11 +318,9 @@ public class JarExplorer extends JFrame
         this.setJMenuBar(mb);
     }
 
-    private void search()
-    {
+    private void search() {
         int found = 0;
-        try
-        {
+        try {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             progressBar.setString("starting to search");
             progressBar.setIndeterminate(true);
@@ -388,13 +330,9 @@ public class JarExplorer extends JFrame
             progressBar.setValue(0);
             progressBar.setIndeterminate(false);
             progressBar.setString("done path searching");
-        }
-        catch (Throwable e)
-        {
+        } catch (Throwable e) {
             GUIUtil.messageBoxWithDetails(JarExplorer.this, "Exception", e);
-        }
-        finally
-        {
+        } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             progressBar.setString("done searching, found: " + found + " entries");
         }
@@ -408,38 +346,38 @@ public class JarExplorer extends JFrame
      * @param jarNameList - List to which we're adding Jar names
      * @throws java.io.IOException If problems processing Jars or directories
      */
-    private void scanDirectory(File f, List jarNameList) throws IOException
-    {
+    private void scanDirectory(File f, List jarNameList) throws IOException {
         File[] children = f.listFiles();
 
-        for (int i = 0; i < children.length; i++)
-        {
-            if (stop)
-            {
+        for (File aChildren : children) {
+            if (stop) {
                 clean();
                 return;
             }
 
-            if (children[i].isFile() && children[i].getName().endsWith("jar"))
-            {
-                String name = children[i].getCanonicalPath();
+            boolean javaArchive = false;
+            String[] extensions = Configuration.getProperty("zip.extensions").split(",");
+
+            for (String extension : extensions) {
+                if (aChildren.isFile() && aChildren.getName().endsWith("." + extension)) {
+                    javaArchive = true;
+                }
+            }
+
+            if (javaArchive) {
+                String name = aChildren.getCanonicalPath();
                 jarNameList.add(name);
                 progressBar.setString("Processing: " + name);
                 indexJarFile(name);
-            }
-            else if (children[i].isDirectory())
-            {
-                scanDirectory(children[i], jarNameList);
-            }
-            else
-            {
+            } else if (aChildren.isDirectory()) {
+                scanDirectory(aChildren, jarNameList);
+            } else {
                 //ignore
             }
         }
     }
 
-    private void clean()
-    {
+    private void clean() {
         jarFilePanel.clean();
         resultsPanel.clean();
         index = new EntryIndex();
@@ -451,16 +389,14 @@ public class JarExplorer extends JFrame
      * Indexes a jar file.
      *
      * @param canonicalPath - fully qualified path to file.
-     * @throws IOException    in case of io problem
+     * @throws IOException in case of io problem
      */
-    private void indexJarFile(String canonicalPath) throws IOException
-    {
+    private void indexJarFile(String canonicalPath) throws IOException {
         FileInputStream fin = new FileInputStream(canonicalPath);
 
         ZipInputStream jin = new ZipInputStream(fin);
-        for (ZipEntry entryName = jin.getNextEntry(); entryName != null; entryName = jin.getNextEntry())
-        {
-            if(!entryName.getName().endsWith("/"))//skip directories
+        for (ZipEntry entryName = jin.getNextEntry(); entryName != null; entryName = jin.getNextEntry()) {
+            if (!entryName.getName().endsWith("/"))//skip directories
             {
                 this.index.addEntryName(canonicalPath, entryName.getName());
             }
@@ -470,58 +406,48 @@ public class JarExplorer extends JFrame
 
     /**
      * This is where indexing is done.
-     * @param f - root directory of the directory tree to be indexed.
+     *
+     * @param topDirectory - root directory of the directory tree to be indexed.
      */
-    private void scanPath(final File f)
-    {
+    private void scanPath(final File topDirectory) {
         String treeRoot;
-        try
-        {
-            treeRoot = f.getCanonicalPath();
+        try {
+            treeRoot = topDirectory.getCanonicalPath();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (IOException e){throw new RuntimeException(e);}
 
         init();
 
-        if (!f.exists())
-        {
+        if (!topDirectory.exists()) {
             throw new RuntimeException("Path: '" + treeRoot + "' does not exist");
         }
 
         //run the parsing in a separate thread.
         final String treeRoot1 = treeRoot;
-        Runnable r = new Runnable()
-        {
-            public void run()
-            {
+        Runnable r = new Runnable() {
+            public void run() {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 progressBar.setIndeterminate(true);
                 progressBar.setString("Parsing tree: " + treeRoot1);
-                try
-                {
+                try {
                     ArrayList jarNameList = new ArrayList();
-                    if(f.isFile())
-                    {
-                        jarNameList.add(f.getCanonicalPath());
-                        indexJarFile(f.getCanonicalPath());
-                    }
-                    else
-                    {
-                        scanDirectory(f, jarNameList);
+                    if (topDirectory.isFile()) {
+                        jarNameList.add(topDirectory.getCanonicalPath());
+                        indexJarFile(topDirectory.getCanonicalPath());
+                    } else {
+                        scanDirectory(topDirectory, jarNameList);
 
                     }
+                    Collections.sort(jarNameList);
                     jarFilePanel.setJarList(jarNameList);
                     Configuration.setProperty(Options.LAST_FILE, treeRoot1);
                     lastFileMI.setText(treeRoot1);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                     progressBar.setString("failed to parse path: " + treeRoot1);
                     GUIUtil.messageBoxWithDetails(JarExplorer.this, "Error Condition:", e);
-                }
-                finally
-                {
+                } finally {
                     progressBar.setValue(0);
                     progressBar.setIndeterminate(false);
                     progressBar.setString("done path parsing");
@@ -531,19 +457,22 @@ public class JarExplorer extends JFrame
                 }
             }
         };
-        
+
         new Thread(r, "Parsing Thread").start();
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         final JarExplorer je = new JarExplorer();
         je.setSize(new Dimension(800, 600));
         je.repaint();
         je.setLocationRelativeTo(null);
         je.setVisible(true);
-        if (args.length == 1)
-        {
+
+        if (Configuration.getProperty("zip.extensions") == null) {
+            Configuration.setProperty("zip.extensions", "jar,zip,war,ear,rar");
+        }
+
+        if (args.length == 1) {
             je.scanPath(new File(args[0]));
         }
     }

@@ -6,8 +6,7 @@ import java.beans.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Properties;
+import java.util.*;
 
 /**
  *   This class presents interface to configurational parameters to application.
@@ -39,6 +38,9 @@ public class Configuration implements PropertyChangeListener
         listeners = new VetoableChangeSupport(this);
     }
 
+    public List<String> getDefaultExtensions(){
+        return Arrays.asList("jar", "zip", "war", "ear", "rar");
+    }
 
     /**
      *  Adds a PropertyChangeListener to this object.
@@ -199,7 +201,6 @@ public class Configuration implements PropertyChangeListener
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
