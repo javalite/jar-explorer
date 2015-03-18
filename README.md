@@ -18,9 +18,11 @@ and execute the following command:
 
 Almost nothing to configure. There is one property file:
 
-.JarExplorer.properties
+    .JarExplorer.properties
+
 This file contains a property:
-zip.extensions=jar,zip,war,ear,rar
+
+    zip.extensions=jar,zip,war,ear,rar
 
 You can add other file extensions here, as long as the files themselves are in zip format.
 
