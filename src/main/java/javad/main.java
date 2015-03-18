@@ -43,7 +43,7 @@ writes out a Java like source representation of the class that
 generated the file. 
 
 */
-class main {
+public class main {
 
   static void usage() {
     errorMessage.errorPrint(" this program takes a set of one or more" +

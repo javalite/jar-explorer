@@ -21,7 +21,7 @@ import java.util.zip.ZipEntry;
  */
 public class JarExplorer extends JFrame {
 
-    private static final String APP_NAME = "JarExplorer 0.6 Beta"; // this version is as good as any :)
+    private static final String APP_NAME = "JarExplorer 0.7 Beta"; // this version is as good as any :)
 
     //this will clean a long running parse, if a Stop button is pressed
     public static boolean stop = false;
