@@ -9,7 +9,7 @@ interfaces, super class, methods, fields, as well as views for text, HTML, image
 ## Installation
 
 You need to have Java 1.4 or higher.
-Download the file: [jarexplorer-0.7-BETA.jar](http://jar-explorer.googlecode.com/files/jarexplorer-0.7-BETA.jar)
+Download the file: [jarexplorer-0.7-BETA.jar](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jarexplorer-0.7-BETA.jar)
 and execute the following command:
 
     java -jar jarexplorer-0.7-BETA.jar
@@ -26,4 +26,4 @@ You can add other file extensions here, as long as the files themselves are in z
 
 ## Screen Shot
 
-![jar-explorer.jpg](jar-explorer.jpg)
+![jar-explorer.jpg](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jar-explorer.jpg)
