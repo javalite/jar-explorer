@@ -9,10 +9,10 @@ interfaces, super class, methods, fields, as well as views for text, HTML, image
 ## Installation
 
 You need to have Java 1.4 or higher.
-Download the file: [jarexplorer-0.7-BETA.jar](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jarexplorer-0.7-BETA.jar)
+Download the file: [jarexplorer-0.7-BETA.jar](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jarexplorer-0.7.jar)
 and execute the following command:
 
-    java -jar jarexplorer-0.7-BETA.jar
+    java -jar jarexplorer-0.7.jar
 
 ## Configuration
 
