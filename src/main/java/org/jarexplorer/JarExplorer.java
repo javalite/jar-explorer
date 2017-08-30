@@ -326,6 +326,16 @@ public class JarExplorer extends JFrame {
             progressBar.setIndeterminate(true);
             ArrayList results = index.search(searchTF.getText());
             found = results.size();
+
+            if(found == 0) {
+                results = index.search(Util.convertFqnToPath(searchTF.getText(), false));
+                found = results.size();
+            }
+
+            if(found == 0) {
+                results = index.search(Util.convertFqnToPath(searchTF.getText(), true));
+                found = results.size();
+            }
             resultsPanel.setResults("Found substring '" + searchTF.getText() + "' in all jars:", results);
             progressBar.setValue(0);
             progressBar.setIndeterminate(false);

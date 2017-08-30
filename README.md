@@ -1,5 +1,5 @@
 
-##Introduction
+## Introduction
 
 This is a  desktop Swing application which will recursively scan a directory and index a large number of jar files
 all at once. It then allows to explore individual jar files or search all jar files at the same time.
