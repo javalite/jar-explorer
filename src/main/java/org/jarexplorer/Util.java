@@ -58,4 +58,40 @@ public class Util
         return bout.toByteArray();
     }
 
+    /**
+     * Check if the string is blank.
+     * @param str
+     * @return true if string is empty
+     */
+    public static boolean isBlankString(String str)
+    {
+        return (str == null || "".equals(str.trim()));
+    }
+
+    /**
+     * Converts a fully qualified name of a java class to its path. <br/>
+     * For example: com.hello.world.MainClass.java will converted to com/hello/world/MainClass.java
+     * @param resourceName Fqn of a file with dots
+     * @param withExtension if it includes extension or not.
+     * @return resource path
+     */
+    public static String convertFqnToPath(String resourceName, boolean withExtension)
+    {
+
+        if(isBlankString(resourceName))
+        {
+            return "";
+        }
+
+        if(withExtension)
+        {
+            int lastIndex = resourceName.lastIndexOf('.');
+
+            return resourceName.substring(0, lastIndex).replace(".", "/")
+                    + resourceName.substring(lastIndex);
+        }
+
+        return resourceName.replace(".", "/");
+    }
+
 }
