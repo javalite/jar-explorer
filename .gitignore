@@ -1,7 +1,11 @@
 *.iml
 *.iws
 *.ipr
+bin
 target
 .idea/
 .DS_Store
+.classpath
+.project
+.settings
 Thumbs.db
