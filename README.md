@@ -28,4 +28,4 @@ You can add other file extensions here, as long as the files themselves are in z
 
 ## Screen Shot
 
-![jar-explorer.jpg](https://github.com/javalite/jar-explorer/tree/master/src/main/resources/jar-explorer.jpg)
+![jar-explorer.jpg](https://raw.githubusercontent.com/javalite/jar-explorer/master/src/main/resources/jar-explorer.jpg)
