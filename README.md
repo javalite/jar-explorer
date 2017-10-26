@@ -1,7 +1,7 @@
 
 ## Introduction
 
-This is a  desktop Swing application which will recursively scan a directory and index a large number of jar files
+This is a desktop Swing application which will recursively scan a directory and index a large number of jar files
 all at once. It then allows to explore individual jar files or search all jar files at the same time.
 It provides a number of views for resources: class - specific, shows all class information:
 interfaces, super class, methods, fields, as well as views for text, HTML, images.
@@ -9,7 +9,7 @@ interfaces, super class, methods, fields, as well as views for text, HTML, image
 ## Installation
 
 You need to have Java 1.4 or higher.
-Download the file: [jarexplorer-0.7.jar](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jarexplorer-0.7.jar)
+Download the file: [jarexplorer-0.7.jar](https://github.com/javalite/jar-explorer/releases/download/v0.7/jarexplorer-0.7.jar)
 and execute the following command:
 
     java -jar jarexplorer-0.7.jar
@@ -28,4 +28,4 @@ You can add other file extensions here, as long as the files themselves are in z
 
 ## Screen Shot
 
-![jar-explorer.jpg](https://raw.githubusercontent.com/javalite/jar-explorer/master/bin/jar-explorer.jpg)
+![jar-explorer.jpg](https://github.com/javalite/jar-explorer/tree/master/src/main/resources/jar-explorer.jpg)
