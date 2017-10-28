@@ -44,6 +44,12 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
  */
 public class JarExplorer extends JFrame {
 
+    private static final long serialVersionUID = 3904974110947067038L;  // we don't want to serializable this, but silence warnings...
+
+    private static final String CONFIG_LAST_FILE = "last.file";
+
+    private static final String CONFIG_ZIP_EXTENSIONS = "zip.extensions";
+  
     // this will clean a long running parse, if a Stop button is pressed
     public static boolean stop = false;
 
@@ -56,7 +62,7 @@ public class JarExplorer extends JFrame {
     /**
      * Progress bar at the bottom
      */
-    public JProgressBar progressBar; // at the botom of main frame
+    public JProgressBar progressBar; // at the bottom of main frame
 
     /**
      * Main split pane
@@ -93,11 +99,6 @@ public class JarExplorer extends JFrame {
      */
     private SearchResultsPanel resultsPanel;
 
-    /**
-     * options dialog - nothing there as of this writing
-     */
-    private OptionsDialog optionsD;
-
     private EntryIndex index = new EntryIndex();
 
     /**
@@ -112,8 +113,6 @@ public class JarExplorer extends JFrame {
     public JarExplorer() {
         super(APP_NAME);
         GUIUtil.setMainFrame(this);
-
-        optionsD = new OptionsDialog(this);
 
         mainSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 jarFilePanel = new JarFilePanel(),
@@ -306,27 +305,17 @@ public class JarExplorer extends JFrame {
 
         fileM.addSeparator();
 
-        lastFileMI = new JMenuItem(Configuration.getProperty(Options.LAST_FILE));
+        lastFileMI = new JMenuItem(Configuration.getProperty(CONFIG_LAST_FILE));
         lastFileMI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final String file = Configuration.getProperty(Options.LAST_FILE);
+                final String file = Configuration.getProperty(CONFIG_LAST_FILE);
                 scanPath(new File(file));
             }
         });
         fileM.add(lastFileMI);
 
         JMenu helpM = new JMenu("Help");
-
-        JMenu toolsM = new JMenu("Tools");
-        JMenuItem optionsMI = new JMenuItem("Options");
-        optionsMI.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                optionsD.setVisible(true);
-            }
-        });
-        toolsM.add(optionsMI);
 
         JMenuItem licenseMI = new JMenuItem("License");
         licenseMI.addActionListener(new ActionListener() {
@@ -351,7 +340,6 @@ public class JarExplorer extends JFrame {
 
         JMenuBar mb = new JMenuBar();
         mb.add(fileM);
-        mb.add(toolsM);
         mb.add(helpM);
         this.setJMenuBar(mb);
     }
@@ -404,7 +392,7 @@ public class JarExplorer extends JFrame {
             }
 
             boolean javaArchive = false;
-            String[] extensions = Configuration.getProperty("zip.extensions").split(",");
+            String[] extensions = Configuration.getProperty(CONFIG_ZIP_EXTENSIONS).split(",");
 
             for (String extension : extensions) {
                 if (aChildren.isFile() && aChildren.getName().endsWith("." + extension)) {
@@ -489,7 +477,7 @@ public class JarExplorer extends JFrame {
                     }
                     Collections.sort(jarNameList);
                     jarFilePanel.setJarList(jarNameList);
-                    Configuration.setProperty(Options.LAST_FILE, treeRoot1);
+                    Configuration.setProperty(CONFIG_LAST_FILE, treeRoot1);
                     lastFileMI.setText(treeRoot1);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -529,8 +517,8 @@ public class JarExplorer extends JFrame {
         Configuration.setFileName(System.getProperty("user.home") + "/" + ".JarExplorer.properties",
                 model.getName());
         // Configuration defaults
-        if (Configuration.getProperty("zip.extensions") == null) {
-            Configuration.setProperty("zip.extensions", "jar,zip,war,ear,rar");
+        if (Configuration.getProperty(CONFIG_ZIP_EXTENSIONS) == null) {
+            Configuration.setProperty(CONFIG_ZIP_EXTENSIONS, "jar,zip,war,ear,rar");
         }
     }
 
