@@ -35,7 +35,7 @@ public class JarExplorer extends JFrame {
     /**
      * Progress bar at the bottom
      */
-    public JProgressBar progressBar; // at the botom of main frame
+    public JProgressBar progressBar; // at the bottom of main frame
 
     /**
      * Main split pane
