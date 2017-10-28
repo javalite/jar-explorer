@@ -4,9 +4,18 @@
     <groupId>org.jarexplorer</groupId>
     <artifactId>jarexplorer</artifactId>
     <packaging>jar</packaging>
-    <version>0.7</version>
-    <name>jarexplorer</name>
-    <url>http://code.google.com/p/jar-explorer/</url>
+    <version>0.8-dev</version>
+    <name>JarExplorer</name>
+    <url>https://github.com/javalite/jar-explorer</url>
+    <inceptionYear>2007</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
     <developers>
         <developer>
             <name>Igor Polevoy</name>
@@ -14,11 +23,15 @@
             <url>http://igorpolevoy.blogspot.com/</url>
         </developer>
     </developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -32,6 +45,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -48,8 +62,17 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <description>explore a single or multiple jars (indexed lookup), providing a number of views for resources: class - specific, shows all class information: interfaces, super class, methods, fields, as well as views for text, HTML, images.</description>
+    <scm>
+        <url>https://github.com/javalite/jar-explorer</url>
+        <connection>scm:git:https://github.com/javalite/jar-explorer.git</connection>
+    </scm>
+    <issueManagement>
+        <url>https://github.com/javalite/jar-explorer/issues</url>
+        <system>GitHub</system>
+    </issueManagement>
 </project>
