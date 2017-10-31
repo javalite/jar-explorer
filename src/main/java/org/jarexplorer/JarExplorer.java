@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -501,8 +502,14 @@ public class JarExplorer extends JFrame {
 
         // Application name and version from POM
         MavenXpp3Reader reader = new MavenXpp3Reader();
+
         try {
-            model = reader.read(new FileReader("pom.xml"));
+            if ((new File("pom.xml")).exists()) {
+                model = reader.read(new FileReader("pom.xml"));
+            } else {
+                model = reader.read(new InputStreamReader(
+                        JarExplorer.class.getResourceAsStream("/META-INF/maven/org.jarexplorer/jarexplorer/pom.xml")));
+            }
         }
         catch (Exception e) {
             // something went wrong with reading the pom, just use a default
